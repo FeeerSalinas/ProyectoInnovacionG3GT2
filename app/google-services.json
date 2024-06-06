@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "802567164135",
+    "project_id": "proyectodeinnovacion-f7ffd",
+    "storage_bucket": "proyectodeinnovacion-f7ffd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802567164135:android:2ab8f7812bd63742e8d242",
+        "android_client_info": {
+          "package_name": "com.example.proyectoinnovaciong3gt2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCe7AXNpU_Mj6-QtVDLrlUwvTl_6M3J9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
