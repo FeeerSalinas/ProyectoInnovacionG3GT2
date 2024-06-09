@@ -22,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.libraries.places.api.Places
@@ -67,6 +68,9 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
             insets
         }
 
+        // Inicializar Firebase Firestore
+        val db = FirebaseFirestore.getInstance()
+        // Obtener referencia al fragmento del mapa y preparar el mapa
 
 
         val bundle:Bundle? = intent.extras
@@ -154,6 +158,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
     override fun onMapReady(map: GoogleMap) {
         this.map = map
         enableLocation()
+        loadAndAddMarkers()
     }
 
     //metodo que llame la interfaz
@@ -286,5 +291,37 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
     private fun zoomOnMap(latLng: LatLng){
         val newLatLngZoom = CameraUpdateFactory.newLatLngZoom(latLng, 12f)
         map?.animateCamera(newLatLngZoom)
+    }
+
+    // Método para cargar tiendas de Firebase y añadir marcadores
+    // Método para cargar tiendas de Firebase y añadir marcadores
+    private fun loadAndAddMarkers() {
+        db.collection("Tiendas").get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val tienda = document.toObject(Tienda::class.java)
+                    val latitudStr = tienda.latitud
+                    val longitudStr = tienda.longitud
+                    val nombreTienda = tienda.nombreTienda
+
+                    // Convertir a Double y verificar si es null
+                    val latitud = latitudStr?.toDoubleOrNull()
+                    val longitud = longitudStr?.toDoubleOrNull()
+
+                    if (latitud != null && longitud != null) {
+                        val position = LatLng(latitud, longitud)
+                        map.addMarker(
+                            MarkerOptions()
+                                .position(position)
+                                .title(nombreTienda)
+                        )
+                    } else {
+                        Log.w(TAG, "Datos inválidos para la tienda: $nombreTienda")
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error al obtener tiendas: ", exception)
+            }
     }
 }
