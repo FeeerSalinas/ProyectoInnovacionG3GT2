@@ -17,9 +17,11 @@ class TiendaAdapter(context: Context, private val tiendas: List<Tienda>) :
 
         val nombreTiendaView = view.findViewById<TextView>(R.id.nombreTienda)
         val nombreDuenoView = view.findViewById<TextView>(R.id.nombreDueno)
+        val telefonoTiendaView = view.findViewById<TextView>(R.id.telefonoTienda)
 
         nombreTiendaView.text = tienda.nombreTienda
         nombreDuenoView.text = tienda.nombreDueno
+        telefonoTiendaView.text = tienda.telefono
 
         return view
     }

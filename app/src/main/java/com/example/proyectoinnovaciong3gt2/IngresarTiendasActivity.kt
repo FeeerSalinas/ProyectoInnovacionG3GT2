@@ -3,6 +3,7 @@ package com.example.proyectoinnovaciong3gt2
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -42,6 +43,8 @@ class IngresarTiendasActivity : AppCompatActivity() {
 
 
             )
+
+            Toast.makeText(this, "Se ha añadido exitosamente una tienda", Toast.LENGTH_SHORT).show()
 
         }
     }

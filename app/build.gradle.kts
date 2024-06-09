@@ -45,11 +45,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    //Bibliotecas utilizadas
+
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
-
-
-    //Bibliotecas utilizadas
 
     //firebase para el login y analisis
     implementation("com.google.firebase:firebase-analytics")

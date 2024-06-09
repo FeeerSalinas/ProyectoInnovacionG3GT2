@@ -5,7 +5,10 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
@@ -22,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
@@ -72,6 +76,12 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
         val db = FirebaseFirestore.getInstance()
         // Obtener referencia al fragmento del mapa y preparar el mapa
 
+        val listView = findViewById<ListView>(R.id.listViewTiendas)
+        obtenerTiendas { tiendas ->
+            val adapter = TiendaAdapter(this, tiendas)
+            listView.adapter = adapter
+        }
+
 
         val bundle:Bundle? = intent.extras
         val email:String?= bundle?.getString("email")
@@ -113,7 +123,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
             startActivity(intent)
         }
 
-        val listView = findViewById<ListView>(R.id.listViewTiendas)
+        //val listView = findViewById<ListView>(R.id.listViewTiendas)
         obtenerTiendas { tiendas ->
             val adapter = TiendaAdapter(this, tiendas)
             listView.adapter = adapter
@@ -217,7 +227,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
     private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(this
         , Manifest.permission.ACCESS_FINE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
-
+//metodo para la localitation
     private fun enableLocation(){
         if(!::map.isInitialized) return
         if(isLocationPermissionGranted()){
@@ -244,7 +254,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
             requestLocationPermission()
         }
     }
-
+//metodo para los permisos
     private fun requestLocationPermission(){
         if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
             Toast.makeText(this, "Se deben aceptar los permisos en ajustes", Toast.LENGTH_SHORT).show()
@@ -252,7 +262,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),REQUEST_CODE_LOCATION )
         }
     }
-
+//metodo para los permisos
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -294,10 +304,12 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
     }
 
     // Método para cargar tiendas de Firebase y añadir marcadores
-    // Método para cargar tiendas de Firebase y añadir marcadores
     private fun loadAndAddMarkers() {
         db.collection("Tiendas").get()
             .addOnSuccessListener { result ->
+                // Limpiar el mapa de marcadores anteriores si es necesario
+                map.clear()
+
                 for (document in result) {
                     val tienda = document.toObject(Tienda::class.java)
                     val latitudStr = tienda.latitud
@@ -310,15 +322,44 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
 
                     if (latitud != null && longitud != null) {
                         val position = LatLng(latitud, longitud)
-                        map.addMarker(
+                        val marker = map.addMarker(
                             MarkerOptions()
                                 .position(position)
-                                .title(nombreTienda)
+                                .title(nombreTienda ?: "Sin nombre")
                         )
+
+                        // Mostrar la ventana de información del marcador
+                        marker?.showInfoWindow()
+
+                        // Programar el cierre de la ventana de información después de 2 segundos
+                        val handler = Handler(Looper.getMainLooper())
+                        handler.postDelayed({
+                            marker?.hideInfoWindow()
+                        }, 2000) // 2000 milisegundos = 2 segundos
                     } else {
                         Log.w(TAG, "Datos inválidos para la tienda: $nombreTienda")
                     }
                 }
+
+                // Configurar el InfoWindowAdapter para personalizar la ventana de información
+                map.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
+                    override fun getInfoWindow(marker: Marker): View? {
+                        // No usar una ventana personalizada predeterminada
+                        return null
+                    }
+
+                    override fun getInfoContents(marker: Marker): View {
+                        // Crear una vista personalizada para la ventana de información
+                        val infoWindow = layoutInflater.inflate(R.layout.custom_info_window, null)
+                        val title = infoWindow.findViewById<TextView>(R.id.title)
+                        val snippet = infoWindow.findViewById<TextView>(R.id.snippet)
+
+                        title.text = marker.title
+                        snippet.text = marker.snippet
+
+                        return infoWindow
+                    }
+                })
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error al obtener tiendas: ", exception)
