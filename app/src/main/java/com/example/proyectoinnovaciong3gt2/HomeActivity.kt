@@ -146,6 +146,8 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
             }
 
         })
+
+        hideAddStoreButtonForNonAdmin()
     }
 
     //para el login
@@ -364,5 +366,19 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error al obtener tiendas: ", exception)
             }
+    }
+
+    // Método para ocultar el botón de agregar tienda para usuarios que no sean admin
+    private fun hideAddStoreButtonForNonAdmin() {
+        val textViewCorreo: TextView = findViewById(R.id.textViewCorreo)
+        val btnAgregarTienda: Button = findViewById(R.id.btnTiendas)
+
+        // Obtener el correo del usuario
+        val userEmail = textViewCorreo.text.toString()
+
+        // Comparar el correo del usuario con el correo del admin
+        if (userEmail != "admin@gmail.com") {
+            btnAgregarTienda.visibility = View.GONE
+        }
     }
 }

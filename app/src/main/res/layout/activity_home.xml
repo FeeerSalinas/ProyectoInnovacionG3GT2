@@ -51,15 +51,15 @@
 
     <Button
         android:id="@+id/btnCerrarSesion"
-        android:layout_width="172dp"
+        android:layout_width="162dp"
         android:layout_height="38dp"
         android:text="Cerrar Sesion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.958" />
 
     <Button
         android:id="@+id/btnTiendas"
@@ -100,15 +100,15 @@
 
     <Button
         android:id="@+id/btnCalcularRuta"
-        android:layout_width="195dp"
-        android:layout_height="37dp"
+        android:layout_width="179dp"
+        android:layout_height="40dp"
         android:text="Calcular Ruta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.958" />
 
     <ListView
         android:id="@+id/listViewTiendas"

@@ -51,6 +51,8 @@ class AuthActivity : AppCompatActivity() {
         val btnLogin: Button = findViewById(R.id.btnAcceder)
         val txtCorreo: EditText = findViewById(R.id.txtCorreo)
         val txtPassword: EditText = findViewById(R.id.txtPassword)
+
+        //boton para acceder
         btnAcceder.setOnClickListener{
             if(txtCorreo.text.isNotEmpty() && txtPassword.text.isNotEmpty()){
                 FirebaseAuth.getInstance()
@@ -65,7 +67,7 @@ class AuthActivity : AppCompatActivity() {
                 }
             }
         }
-
+//boton para logearse
         btnLogin.setOnClickListener{
             if(txtCorreo.text.isNotEmpty() && txtPassword.text.isNotEmpty()){
                 FirebaseAuth.getInstance()
