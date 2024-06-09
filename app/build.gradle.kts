@@ -63,4 +63,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
     //firebase para el store
     implementation("com.google.firebase:firebase-firestore:25.0.0")
+    //libreria para el buscador de sitios de google maps
+    implementation("com.google.android.libraries.places:places:3.5.0")
+
 }
