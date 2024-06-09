@@ -1,9 +1,11 @@
 package com.example.proyectoinnovaciong3gt2
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -17,6 +19,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,6 +31,8 @@ enum class ProviderType{
 }
 
 class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
+
+    private val db = FirebaseFirestore.getInstance()
 
     private lateinit var map:GoogleMap
     private lateinit var btnCalcular:Button
@@ -86,6 +91,12 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
             val intent = Intent(this, IngresarTiendasActivity::class.java)
             startActivity(intent)
         }
+
+        val listView = findViewById<ListView>(R.id.listViewTiendas)
+        obtenerTiendas { tiendas ->
+            val adapter = TiendaAdapter(this, tiendas)
+            listView.adapter = adapter
+        }
     }
 
     //para el login
@@ -143,5 +154,21 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
             .baseUrl("https://api.openrouteservice.org/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    //Funcion para obtener las tiendas
+    fun obtenerTiendas(callback: (List<Tienda>) -> Unit) {
+        db.collection("Tiendas").get()
+            .addOnSuccessListener { result ->
+                val tiendas = mutableListOf<Tienda>()
+                for (document in result) {
+                    val tienda = document.toObject(Tienda::class.java)
+                    tiendas.add(tienda)
+                }
+                callback(tiendas)
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error al obtener documentos: ", exception)
+            }
     }
 }
