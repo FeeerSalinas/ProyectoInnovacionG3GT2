@@ -1,5 +1,6 @@
 package com.example.proyectoinnovaciong3gt2
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -78,6 +79,12 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback{
                     }
                 }
             }
+        }
+
+        val btnTiendas:Button = findViewById(R.id.btnTiendas)
+        btnTiendas.setOnClickListener {
+            val intent = Intent(this, IngresarTiendasActivity::class.java)
+            startActivity(intent)
         }
     }
 

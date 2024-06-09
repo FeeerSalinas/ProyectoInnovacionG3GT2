@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IngresarTiendasActivity">
+
+
+    <EditText
+        android:id="@+id/txtCodigoTienda"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:background="@drawable/borde_redondedado"
+        android:ems="10"
+        android:hint="Codigo tienda"
+        android:inputType="text"
+        android:textColorHint="#6166E1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.233" />
+
+    <EditText
+        android:id="@+id/txtNombreTienda"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:background="@drawable/borde_redondedado"
+        android:ems="10"
+        android:hint="Nombre tienda"
+        android:inputType="text"
+        android:textColorHint="#6166E1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.349" />
+
+    <EditText
+        android:id="@+id/txtNombreDueno"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:background="@drawable/borde_redondedado"
+        android:ems="10"
+        android:hint="Nombre dueño"
+        android:inputType="text"
+        android:textColorHint="#6166E1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.469" />
+
+    <EditText
+        android:id="@+id/txtTelefono"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:background="@drawable/borde_redondedado"
+        android:ems="10"
+        android:hint="Telefono"
+        android:inputType="text"
+        android:textColorHint="#6166E1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.59" />
+
+    <EditText
+        android:id="@+id/txtLatitud"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:background="@drawable/borde_redondedado"
+        android:ems="10"
+        android:hint="Latitud"
+        android:inputType="text"
+        android:textColorHint="#6166E1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.719" />
+
+    <EditText
+        android:id="@+id/txtLongitud"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:background="@drawable/borde_redondedado"
+        android:ems="10"
+        android:hint="Longitud"
+        android:inputType="text"
+        android:textColorHint="#6166E1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.837" />
+
+    <Button
+        android:id="@+id/btnAgregarTienda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Añadir tienda"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.934" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

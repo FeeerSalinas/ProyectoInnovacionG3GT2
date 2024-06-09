@@ -47,7 +47,6 @@ dependencies {
 
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
-    //implementando google maps
 
 
     //Bibliotecas utilizadas
@@ -62,4 +61,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    //firebase para el store
+    implementation("com.google.firebase:firebase-firestore:25.0.0")
 }
