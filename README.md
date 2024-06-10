@@ -1,1 +1,1 @@
-Proyecto de innovación, creemos que estamos haciendo el nuevo Pedidos Ya, pero en versión humilde y sin los millones, también no somos ni juniors
+Proyecto de innovación, desarrollo de la app Mandaditos SV, haciendo uso de apis de google maps y OpenRoutServices para el trazado de rutas, utilizar api 34
